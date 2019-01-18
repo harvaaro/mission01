@@ -31,7 +31,11 @@ public class Scoreboard {
      * @param entry Entry to be added.
      */
     public void add(GameEntry entry) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (entry != null) {
+            board.addFirst(entry);
+        }
+
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
@@ -43,7 +47,15 @@ public class Scoreboard {
      * to the list size or less than zero.
      */
     public GameEntry remove(int i) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (i >= size()) {
+            throw new IndexOutOfBoundsException("Index is greater than List bounds");
+        }
+        else if (i < 0) {
+            throw new IndexOutOfBoundsException("Index is less than List bounds");
+        }
+        return board.remove(i);
+
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**

@@ -2,6 +2,12 @@ package edu.isu.cs.cs3308.structures.impl;
 
 import edu.isu.cs.cs3308.structures.List;
 
+/**
+ * A class to implement a singley linked list based off the List class
+ *
+ * @author Aaron Harvey
+ * @param <E>
+ */
 public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E first() {
