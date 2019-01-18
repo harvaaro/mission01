@@ -1,14 +1,25 @@
 package edu.isu.cs.cs3308.structures.impl;
 
 import edu.isu.cs.cs3308.structures.List;
+import edu.isu.cs.cs3308.structures.Node;
 
 /**
- * A class to implement a singley linked list based off the List class
+ * A class to implement a singly linked list based off the List class
  *
  * @author Aaron Harvey
  * @param <E>
  */
 public class SinglyLinkedList<E> implements List<E> {
+
+    // Head node for the List
+    protected Node<E> head;
+
+    // Tail node for the List
+    protected Node<E> tail;
+
+    // Count of the nodes in the List
+    protected int size = 0;
+
     @Override
     public E first() {
         return null;
