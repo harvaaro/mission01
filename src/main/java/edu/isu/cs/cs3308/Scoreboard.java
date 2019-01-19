@@ -33,8 +33,10 @@ public class Scoreboard {
 	public void add(GameEntry entry) {
         // Added code to implement the needed add process
         // @author Aaron Harvey
-		if (entry != null) {
-			board.addFirst(entry);
+		if (capacity != size()) {
+			if (entry != null) {
+				board.addFirst(entry);
+			}
 		}
 
 		// Original code by Isaac Griffith
