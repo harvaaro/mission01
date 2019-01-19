@@ -36,8 +36,11 @@ public class SinglyLinkedList<E> implements List<E> {
 
 		// seek through the list starting from the head
 		for (int i = 0; i < index; i++) {
-			//TODO
+			seekNode = seekNode.getNext();
 		}
+
+		// return the desired Node from the list index
+		return seekNode;
 	}
 
 	private void addSize() {
@@ -54,12 +57,12 @@ public class SinglyLinkedList<E> implements List<E> {
 
 	@Override
 	public E first() {
-	    return head.getData();
+	    return (head != null) ? head.getData() : null;
 	}
 
 	@Override
 	public E last() {
-		return tail.getData();
+		return (tail != null) ? tail.getData() : null;
 	}
 
 	@Override
@@ -69,8 +72,8 @@ public class SinglyLinkedList<E> implements List<E> {
             // create the new node
             Node<E> lastNode = new Node<>(element);
 
-            // set its next to be the next of the tail
-            lastNode.setNext(tail.getNext());
+            // set its next to be null
+            lastNode.setNext(null);
 
             // make the original tail next to the tail to be
             tail.setNext(lastNode);
@@ -103,52 +106,77 @@ public class SinglyLinkedList<E> implements List<E> {
 
 	@Override
 	public E removeFirst() {
-		// keep track of the original head
-		Node<E> removeNode = head;
+		// if the head Node is not null
+		if (head != null) {
 
-		// decrement size
-		subSize();
+			// keep track of the original head
+			Node<E> removeNode = head;
 
-		//TODO
+			// set the new head to next of original
+			head = removeNode.getNext();
 
-		// return the original head data
-		return removeNode.getData();
+			// remove next of original head
+			removeNode.setNext(null);
+
+			// decrement size
+			subSize();
+
+			// return the original head data
+			return removeNode.getData();
+		}
+
+		// else there is no head Node
+		else {
+			return null;
+		}
 	}
 
 	@Override
 	public E removeLast() {
-		// keep track of the original tail
-		Node<E> removeNode = tail;
+		// because of how remove works, check if there are at least 2 nodes
+		if (size > 1) {
+			return remove(size - 1);
+		}
 
-		// decrement size
-		subSize();
-
-		//TODO
-
-		// return the original tail data
-		return removeNode.getData();
+		// else just remove the first node
+		else {
+			return removeFirst();
+		}
 	}
 
 	@Override
 	public void insert(E element, int index) {
-	    // if the index and element is a usable value and not null respectively
-	    if (checkIndex(index) && checkElement(element)) {
-			// incrememnt size
-			addSize();
-
+	    // if the element is not null
+	    if (checkElement(element)) {
 			// if the index is the head
 			if (index == 0) {
 				addFirst(element);
 			}
 
 			// else if the index is the tail
-			else if (index == size-1) {
+			else if (index >= size) {
 				addLast(element);
 			}
 
 			// else the index is some other node
 			else {
-				//TODO
+				// check if the index is a usable value
+				if (checkIndex(index)) {
+					// get the node before the one to be added
+					Node<E> prevNode = getNode(index-1);
+
+					// create the node to be inserted
+					Node<E> insertNode = new Node<>(element);
+
+					// set the correct next for the new node
+					insertNode.setNext(prevNode.getNext());
+
+					// set the correct next for the previous node
+					prevNode.setNext(insertNode);
+
+					// incrememnt size
+					addSize();
+				}
 			}
         }
 	}
@@ -157,23 +185,30 @@ public class SinglyLinkedList<E> implements List<E> {
 	public E remove(int index) {
 		// check if the index is a usable value
 		if (checkIndex(index)) {
-			// decrement size
-			subSize();
-
 			// if the index is the head
 			if (index == 0) {
 				return removeFirst();
 			}
 
-			// else if the index is the tail
-			else if (index == size-1) {
-				return removeLast();
-			}
-
 			// else the index is some other node
 			else {
-				//TODO
-				return null;
+				// get the node before the one to be removed
+				Node<E> prevNode = getNode(index-1);
+
+				// get the node that will be removed
+				Node<E> removeNode = prevNode.getNext();
+
+				// set the new connection with the node removed
+				prevNode.setNext(removeNode.getNext());
+
+				// null out the next of the removeNode
+				removeNode.setNext(null);
+
+				// decrement size
+				subSize();
+
+				// return the removed Node data
+				return removeNode.getData();
 			}
 		}
 
@@ -216,8 +251,7 @@ public class SinglyLinkedList<E> implements List<E> {
 
 	@Override
 	public boolean isEmpty() {
-		//TODO
-		return false;
+		return (size == 0) ? true : false;
 	}
 
 	@Override
