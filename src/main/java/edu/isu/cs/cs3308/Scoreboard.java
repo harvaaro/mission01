@@ -31,10 +31,8 @@ public class Scoreboard {
 	 * @param entry Entry to be added.
 	 */
 	public void add(GameEntry entry) {
-		/**
-		 * Added code to implement the needed add process
-		 * @author Aaron Harvey
-		 */
+        // Added code to implement the needed add process
+        // @author Aaron Harvey
 		if (entry != null) {
 			board.addFirst(entry);
 		}
@@ -52,10 +50,8 @@ public class Scoreboard {
 	 * to the list size or less than zero.
 	 */
 	public GameEntry remove(int i) throws IndexOutOfBoundsException {
-		/**
-		 * Added code to implement the needed remove process
-		 * @author Aaron Harvey
-		 */
+		// Added code to implement the needed remove process
+        // @author Aaron Harvey
 		if (i >= size()) {
 			throw new IndexOutOfBoundsException("Index is greater than List bounds");
 		}
