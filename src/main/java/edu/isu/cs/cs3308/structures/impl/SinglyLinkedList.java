@@ -30,6 +30,17 @@ public class SinglyLinkedList<E> implements List<E> {
 	    return (index < size && index >= 0) ? true : false;
     }
 
+    private void singleHeadTail(Node<E> theNode) {
+		if (size == 1) {
+			head = theNode;
+			tail = theNode;
+		}
+		else if (size == 0) {
+			head = null;
+			tail = null;
+		}
+	}
+
     private Node<E> getNode(int index) {
 		// get current head node to start from
 		Node<E> seekNode = head;
@@ -69,20 +80,27 @@ public class SinglyLinkedList<E> implements List<E> {
 	public void addLast(E element) {
 	    // check if the element is not null
         if (checkElement(element)) {
-            // create the new node
-            Node<E> lastNode = new Node<>(element);
+        	// check if the size is at least 1
+        	if (!isEmpty()) {
+				// create the new node
+				Node<E> lastNode = new Node<>(element);
 
-            // set its next to be null
-            lastNode.setNext(null);
+				// set its next to be null
+				lastNode.setNext(null);
 
-            // make the original tail next to the tail to be
-            tail.setNext(lastNode);
+				// make the original tail next to the tail to be
+				tail.setNext(lastNode);
 
-            // change the tail to the new node
-            tail = lastNode;
+				// change the tail to the new node
+				tail = lastNode;
 
-            // incrememnt size
-			addSize();
+				// incrememnt size
+				addSize();
+			}
+        	// else if size is 0 just add first
+        	else {
+        		addFirst(element);
+			}
         }
 	}
 
@@ -101,6 +119,9 @@ public class SinglyLinkedList<E> implements List<E> {
 
 			// incrememnt size
 			addSize();
+
+			// fix the head and tail if single node in list
+			singleHeadTail(firstNode);
         }
 	}
 
@@ -120,6 +141,9 @@ public class SinglyLinkedList<E> implements List<E> {
 
 			// decrement size
 			subSize();
+
+			// fix the head and tail if single node in list
+			singleHeadTail(head);
 
 			// return the original head data
 			return removeNode.getData();
@@ -206,6 +230,9 @@ public class SinglyLinkedList<E> implements List<E> {
 
 				// decrement size
 				subSize();
+
+				// fix the head and tail if single node in list
+				singleHeadTail(prevNode);
 
 				// return the removed Node data
 				return removeNode.getData();
