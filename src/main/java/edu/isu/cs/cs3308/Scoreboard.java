@@ -11,74 +11,74 @@ import edu.isu.cs.cs3308.structures.impl.SinglyLinkedList;
  */
 public class Scoreboard {
 
-    private int capacity; // maximum capacity constraint
-    private List<GameEntry> board; // Underlying list data structure
+	private int capacity; // maximum capacity constraint
+	private List<GameEntry> board; // Underlying list data structure
 
-    /**
-     * Constructs a new scoreboard with the provided maximum capacity.
-     *
-     * @param capacity Maximum number of entries supported by this scoreboard.
-     */
-    public Scoreboard(int capacity) {
-        board = new SinglyLinkedList<>();
-        this.capacity = capacity;
-    }
+	/**
+	 * Constructs a new scoreboard with the provided maximum capacity.
+	 *
+	 * @param capacity Maximum number of entries supported by this scoreboard.
+	 */
+	public Scoreboard(int capacity) {
+		board = new SinglyLinkedList<>();
+		this.capacity = capacity;
+	}
 
-    /**
-     * Adds the specified GameEntry to the top of the List. If the entry is null
-     * we should expect nothing to happen.
-     *
-     * @param entry Entry to be added.
-     */
-    public void add(GameEntry entry) {
-        /**
-         * Added code to implement the needed add process
-         * @author Aaron Harvey
-         */
-        if (entry != null) {
-            board.addFirst(entry);
-        }
+	/**
+	 * Adds the specified GameEntry to the top of the List. If the entry is null
+	 * we should expect nothing to happen.
+	 *
+	 * @param entry Entry to be added.
+	 */
+	public void add(GameEntry entry) {
+		/**
+		 * Added code to implement the needed add process
+		 * @author Aaron Harvey
+		 */
+		if (entry != null) {
+			board.addFirst(entry);
+		}
 
-        // Original code by Isaac Griffith
+		// Original code by Isaac Griffith
 //        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	}
 
-    /**
-     * Removes the element at the provided index from the scoreboard.
-     *
-     * @param i the index of the element to be removed.
-     * @return GameEntry at the specified index
-     * @throws IndexOutOfBoundsException If the index is greater than or equal
-     * to the list size or less than zero.
-     */
-    public GameEntry remove(int i) throws IndexOutOfBoundsException {
-        /**
-         * Added code to implement the needed remove process
-         * @author Aaron Harvey
-         */
-        if (i >= size()) {
-            throw new IndexOutOfBoundsException("Index is greater than List bounds");
-        }
-        else if (i < 0) {
-            throw new IndexOutOfBoundsException("Index is less than List bounds");
-        }
-        return board.remove(i);
+	/**
+	 * Removes the element at the provided index from the scoreboard.
+	 *
+	 * @param i the index of the element to be removed.
+	 * @return GameEntry at the specified index
+	 * @throws IndexOutOfBoundsException If the index is greater than or equal
+	 * to the list size or less than zero.
+	 */
+	public GameEntry remove(int i) throws IndexOutOfBoundsException {
+		/**
+		 * Added code to implement the needed remove process
+		 * @author Aaron Harvey
+		 */
+		if (i >= size()) {
+			throw new IndexOutOfBoundsException("Index is greater than List bounds");
+		}
+		else if (i < 0) {
+			throw new IndexOutOfBoundsException("Index is less than List bounds");
+		}
+		return board.remove(i);
 
-        // Original code by Isaac Griffith
+		// Original code by Isaac Griffith
 //        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	}
 
-    /**
-     * Prints the contents of the scoreboard to the console.
-     */
-    public void printScores() {
-        board.printList();
-    }
+	/**
+	 * Prints the contents of the scoreboard to the console.
+	 */
+	public void printScores() {
+		board.printList();
+	}
 
-    /**
-     * @return current number of entries held by the scoreboard.
-     */
-    public int size() {
-        return board.size();
-    }
+	/**
+	 * @return current number of entries held by the scoreboard.
+	 */
+	public int size() {
+		return board.size();
+	}
 }

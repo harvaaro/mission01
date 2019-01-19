@@ -11,72 +11,108 @@ import edu.isu.cs.cs3308.structures.Node;
  */
 public class SinglyLinkedList<E> implements List<E> {
 
-    // Head node for the List
-    protected Node<E> head;
+	// Head node for the List
+	protected Node<E> head = null;
 
-    // Tail node for the List
-    protected Node<E> tail;
+	// Tail node for the List
+	protected Node<E> tail = null;
 
-    // Count of the nodes in the List
-    protected int size = 0;
+	// Count of the nodes in the List
+	protected int size = 0;
 
-    @Override
-    public E first() {
-        return null;
+	private boolean checkElement(E element) {
+	    // may eventually throw an error or some message
+        // but currently am just doing an error check
+	    return (element != null) ? true : false;
     }
 
-    @Override
-    public E last() {
-        return null;
+    private boolean checkIndex(int index) {
+	    return (index <= size && index > 0) ? true : false;
     }
 
-    @Override
-    public void addLast(E element) {
+	@Override
+	public E first() {
+	    return head.getData();
+	}
 
-    }
+	@Override
+	public E last() {
+		return tail.getData();
+	}
 
-    @Override
-    public void addFirst(E element) {
+	@Override
+	public void addLast(E element) {
+	    // check if the element is not null
+        if (checkElement(element)) {
+            // create the new node
+            Node<E> lastNode = new Node<>(element);
 
-    }
+            // set its next to be the next of the tail
+            lastNode.setNext(tail.getNext());
 
-    @Override
-    public E removeFirst() {
-        return null;
-    }
+            // make the original tail next to the tail to be
+            tail.setNext(lastNode);
 
-    @Override
-    public E removeLast() {
-        return null;
-    }
+            // change the tail to the new node
+            tail = lastNode;
 
-    @Override
-    public void insert(E element, int index) {
+        }
+	}
 
-    }
+	@Override
+	public void addFirst(E element) {
+        // check if the element is not null
+	    if (checkElement(element)) {
+            // create the new node
+	        Node<E> firstNode = new Node<>(element);
 
-    @Override
-    public E remove(int index) {
-        return null;
-    }
+	        // make the next of the new node to the original head
+	        firstNode.setNext(head);
 
-    @Override
-    public E get(int index) {
-        return null;
-    }
+	        // change the head to the new node
+	        head = firstNode;
+        }
+	}
 
-    @Override
-    public int size() {
-        return 0;
-    }
+	@Override
+	public E removeFirst() {
+		return null;
+	}
 
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
+	@Override
+	public E removeLast() {
+		return null;
+	}
 
-    @Override
-    public void printList() {
+	@Override
+	public void insert(E element, int index) {
+	    // if the index and element is a usable value and not null respectively
+	    if (checkIndex(index) && checkElement(element)) {
+        }
+	}
 
-    }
+	@Override
+	public E remove(int index) {
+		return null;
+	}
+
+	@Override
+	public E get(int index) {
+		return null;
+	}
+
+	@Override
+	public int size() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public void printList() {
+
+	}
 }
