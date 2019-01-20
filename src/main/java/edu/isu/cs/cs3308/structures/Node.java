@@ -5,7 +5,7 @@ package edu.isu.cs.cs3308.structures;
  * based on code shown by Isaac Griffith in class
  *
  * @author Aaron Harvey
- * @param <E>
+ * @param <E> any type of node
  */
 public class Node<E> {
 
@@ -23,7 +23,7 @@ public class Node<E> {
 		this.data = data;
 	}
 
-	// Follow code I created with the IntelliJ Generator
+	// The following code I created with the IntelliJ Generator
 	// I also added comments on them for completeness.
 
 	/**

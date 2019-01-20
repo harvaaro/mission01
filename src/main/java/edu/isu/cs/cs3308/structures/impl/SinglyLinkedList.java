@@ -7,7 +7,7 @@ import edu.isu.cs.cs3308.structures.Node;
  * A class to implement a singly linked list based off the List class
  *
  * @author Aaron Harvey
- * @param <E>
+ * @param <E> any type of list
  */
 public class SinglyLinkedList<E> implements List<E> {
 
@@ -20,27 +20,50 @@ public class SinglyLinkedList<E> implements List<E> {
 	// Count of the nodes in the List
 	protected int size = 0;
 
+	/**
+	 * Checks to see if a given element is null or not
+	 * @param element the element to check
+	 * @return true if not null, and false if null
+	 */
 	private boolean checkElement(E element) {
 	    // may eventually throw an error or some message
         // but currently am just doing an error check
 	    return (element != null) ? true : false;
     }
 
-    private boolean checkIndex(int index) {
+	/**
+	 * Checks to see if a given index is within 0 and size
+	 * @param index the index to check
+	 * @return true if valid index, and false if invalid
+	 */
+	private boolean checkIndex(int index) {
 	    return (index < size && index >= 0) ? true : false;
     }
 
-    private void singleHeadTail(Node<E> theNode) {
+	/**
+	 * Used to fix the head and tail of the list
+	 * If a single node remains in the list, then head and tail are set to it
+	 * If the size of the list is 0 then set head and tail to null
+	 * @param theNode The node to set if its the only one in the list
+	 */
+	private void singleHeadTail(Node<E> theNode) {
+		// if theNode is the only one in the list
 		if (size == 1) {
 			head = theNode;
 			tail = theNode;
 		}
+		// else there are no nodes in the list
 		else if (size == 0) {
 			head = null;
 			tail = null;
 		}
 	}
 
+	/**
+	 * Get a node from the list given a specific index
+	 * @param index The index within the list
+	 * @return The node retrieved from the list
+	 */
     private Node<E> getNode(int index) {
 		// get current head node to start from
 		Node<E> seekNode = head;
@@ -54,10 +77,17 @@ public class SinglyLinkedList<E> implements List<E> {
 		return seekNode;
 	}
 
+	/**
+	 * Adds 1 to the size value.
+	 * I put this as a function if I ever needed to do other checks with it
+	 */
 	private void addSize() {
 		size++;
 	}
 
+	/**
+	 * Subtracts 1 from the size value, and ensure it cannot go below 0
+	 */
 	private void subSize() {
 		size--;
 
@@ -66,16 +96,28 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 	}
 
+	/**
+	 * To get the data from the first node in the list
+	 * @return The data within the head node, if none then null
+	 */
 	@Override
 	public E first() {
 	    return (head != null) ? head.getData() : null;
 	}
 
+	/**
+	 * To get the data from the last node in the list
+	 * @return The data within the tail node, if none then null
+	 */
 	@Override
 	public E last() {
 		return (tail != null) ? tail.getData() : null;
 	}
 
+	/**
+	 * Creates a node with the given element data to the end of the list
+	 * @param element Data to store in the last node
+	 */
 	@Override
 	public void addLast(E element) {
 	    // check if the element is not null
@@ -94,7 +136,7 @@ public class SinglyLinkedList<E> implements List<E> {
 				// change the tail to the new node
 				tail = lastNode;
 
-				// incrememnt size
+				// increment size
 				addSize();
 			}
         	// else if size is 0 just add first
@@ -104,6 +146,10 @@ public class SinglyLinkedList<E> implements List<E> {
         }
 	}
 
+	/**
+	 * Creates a node with the given element data to the beginning of the list
+	 * @param element Data to store in the first node
+	 */
 	@Override
 	public void addFirst(E element) {
         // check if the element is not null
@@ -117,7 +163,7 @@ public class SinglyLinkedList<E> implements List<E> {
 	        // change the head to the new node
 	        head = firstNode;
 
-			// incrememnt size
+			// increment size
 			addSize();
 
 			// fix the head and tail if single node in list
@@ -125,6 +171,10 @@ public class SinglyLinkedList<E> implements List<E> {
         }
 	}
 
+	/**
+	 * Removes the first node in the list
+	 * @return Data stored within the node that is to be removed
+	 */
 	@Override
 	public E removeFirst() {
 		// if the head Node is not null
@@ -155,6 +205,10 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 	}
 
+	/**
+	 * Removes the last node in the list
+	 * @return Data stored within the node that is to be removed
+	 */
 	@Override
 	public E removeLast() {
 		// because of how remove works, check if there are at least 2 nodes
@@ -168,6 +222,12 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 	}
 
+	/**
+	 * Create a node with the given element data, and insert that node
+	 * into the list at the given index
+	 * @param element Data to store in the node
+	 * @param index Where in the list the node should be inserted
+	 */
 	@Override
 	public void insert(E element, int index) {
 	    // if the element is not null
@@ -198,13 +258,18 @@ public class SinglyLinkedList<E> implements List<E> {
 					// set the correct next for the previous node
 					prevNode.setNext(insertNode);
 
-					// incrememnt size
+					// increment size
 					addSize();
 				}
 			}
         }
 	}
 
+	/**
+	 * Removes a given node from the list based on a given index
+	 * @param index The index of the node in the list to remove
+	 * @return Data stored within the node that is to be removed
+	 */
 	@Override
 	public E remove(int index) {
 		// check if the index is a usable value
@@ -245,6 +310,11 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 	}
 
+	/**
+	 * Get the data within a node from the list at the given index
+	 * @param index The index of the node in the list to retrieve
+	 * @return Data stored within the node that is to be retrieved
+	 */
 	@Override
 	public E get(int index) {
 		// check if the index is a usable value
@@ -271,18 +341,31 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 	}
 
+	/**
+	 * The stored value which contains the number of nodes within the list
+	 * @return The count of nodes in the list
+	 */
 	@Override
 	public int size() {
 		return size;
 	}
 
+	/**
+	 * Determines if the list is empty or not
+	 * @return True if the list is empty, and false if size does not equal 0
+	 */
 	@Override
 	public boolean isEmpty() {
 		return (size == 0) ? true : false;
 	}
 
+	/**
+	 * For each node in the list, print out its index on a new line
+	 */
 	@Override
 	public void printList() {
-		//TODO
+		for (int i = 0; i < size; i++) {
+			System.out.println(get(i));
+		}
 	}
 }
