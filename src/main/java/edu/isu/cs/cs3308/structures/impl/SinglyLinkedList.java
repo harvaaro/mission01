@@ -179,24 +179,41 @@ public class SinglyLinkedList<E> implements List<E> {
 	public E removeFirst() {
 		// if the head Node is not null
 		if (head != null) {
+			// if there are more than 1 nodes in the list
+			if (size > 1) {
 
-			// keep track of the original head
-			Node<E> removeNode = head;
+				// keep track of the original head
+				Node<E> removeNode = head;
 
-			// set the new head to next of original
-			head = removeNode.getNext();
+				// set the new head to next of original
+				head = removeNode.getNext();
 
-			// remove next of original head
-			removeNode.setNext(null);
+				// remove next of original head
+				removeNode.setNext(null);
 
-			// decrement size
-			subSize();
+				// decrement size
+				subSize();
 
-			// fix the head and tail if single node in list
-			singleHeadTail(head);
+				// fix the head and tail if single node in list
+				singleHeadTail(head);
 
-			// return the original head data
-			return removeNode.getData();
+				// return the original head data
+				return removeNode.getData();
+			}
+			// else there is only one node in the list to remove
+			else {
+				// make a temp of the current head node
+				Node<E> removeNode = head;
+
+				// set the list head and tail to null
+				head.setNext(null);
+				head = null;
+				tail.setNext(null);
+				tail = null;
+
+				// return the data
+				return removeNode.getData();
+			}
 		}
 
 		// else there is no head Node
