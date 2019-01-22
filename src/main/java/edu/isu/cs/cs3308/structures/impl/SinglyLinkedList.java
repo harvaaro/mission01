@@ -154,14 +154,22 @@ public class SinglyLinkedList<E> implements List<E> {
 	public void addFirst(E element) {
         // check if the element is not null
 	    if (checkElement(element)) {
-            // create the new node
-	        Node<E> firstNode = new Node<>(element);
+			// create the new node
+			Node<E> firstNode = new Node<>(element);
 
-	        // make the next of the new node to the original head
-	        firstNode.setNext(head);
+			// if there is more than one node in the list
+	    	if (size > 0) {
+				// make the next of the new node to the original head
+				firstNode.setNext(head);
+			}
+	    	// else this is the only node in the list
+	    	else {
+	    		// there are no other nodes so just have it as null
+	    		firstNode.setNext(null);
+			}
 
-	        // change the head to the new node
-	        head = firstNode;
+			// change the head to the new node
+			head = firstNode;
 
 			// increment size
 			addSize();
@@ -381,8 +389,23 @@ public class SinglyLinkedList<E> implements List<E> {
 	 */
 	@Override
 	public void printList() {
-		for (int i = 0; i < size; i++) {
-			System.out.println(get(i));
+		// if there are nodes in the list
+		if (!isEmpty()) {
+			// get the head as the starting point
+			Node<E> printNode = head;
+
+			// iterate though the list, until we reach the end
+			for (int i = 0; i < size; i++) {
+				// print the current nodes data on a new line
+				System.out.println(printNode.getData());
+
+				// then get the next node to get data from
+				printNode = printNode.getNext();
+			}
+		}
+		// else there are no nodes in the list
+		else {
+			System.out.println("There is nothing in this list.");
 		}
 	}
 }
